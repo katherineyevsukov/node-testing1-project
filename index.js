@@ -8,6 +8,12 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+ let newObj = {...obj}
+ for (const prop in newObj) {
+   newObj[prop] = newObj[prop].trim()
+ }
+
+ return newObj
 }
 
 /**
