@@ -52,15 +52,9 @@ describe('[Exercise 4] Counter', () => {
   test('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
     counter.countDown()
     const actual = counter.countDown()
-    expect(actual).toEqual(2)
+    expect(actual).toBe(2)
   })
   test('[8] the count eventually reaches zero but does not go below zero', () => {
-    // expect(counter.countDown()).toEqual(3)
-    // expect(counter.countDown()).toEqual(2)
-    // expect(counter.countDown()).toEqual(1)
-    // expect(counter.countDown()).toEqual(0)
-    // expect(counter.countDown()).toEqual(0)
-    // expect(counter.countDown()).toEqual(0)
     for (let i = 0; i < 10; i++){
       counter.countDown()
     }
@@ -68,17 +62,42 @@ describe('[Exercise 4] Counter', () => {
   })
 })
 
+
 describe('[Exercise 5] Seasons', () => {
   let seasons
-  // beforeEach(() => {
-  //   seasons = new utils.Seasons() // each test must start with fresh seasons
-  // })
-  // test('[9] the FIRST call of seasons.next returns "summer"', () => {})
-  // test('[10] the SECOND call of seasons.next returns "fall"', () => {})
-  // test('[11] the THIRD call of seasons.next returns "winter"', () => {})
-  // test('[12] the FOURTH call of seasons.next returns "spring"', () => {})
-  // test('[13] the FIFTH call of seasons.next returns again "summer"', () => {})
-  // test('[14] the 40th call of seasons.next returns "spring"', () => {})
+  beforeEach(() => {
+    seasons = new utils.Seasons() // each test must start with fresh seasons
+  })
+  test('[9] the FIRST call of seasons.next returns "summer"', () => {
+    expect(seasons.next()).toBe("summer")
+  })
+  test('[10] the SECOND call of seasons.next returns "fall"', () => {
+    seasons.next()
+    expect(seasons.next()).toBe("fall")
+  })
+  test('[11] the THIRD call of seasons.next returns "winter"', () => {
+    seasons.next()
+    seasons.next()
+    expect(seasons.next()).toBe("winter")
+  })
+  test('[12] the FOURTH call of seasons.next returns "spring"', () => {
+    for (let i = 0; i < 4; i++){
+      seasons.next()
+    }
+    expect(seasons.season).toBe("spring")
+  })
+  test('[13] the FIFTH call of seasons.next returns again "summer"', () => {
+    for (let i = 0; i < 5; i++){
+      seasons.next()
+    }
+    expect(seasons.season).toBe("summer")
+  })
+  test('[14] the 40th call of seasons.next returns "spring"', () => {
+    for (let i = 1; i < 40; i++){
+      seasons.next()
+    }
+    expect(seasons.next()).toBe("spring")
+  })
 })
 
 describe('[Exercise 6] Car', () => {
