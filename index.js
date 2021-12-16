@@ -132,8 +132,11 @@ class Car {
    * @param {number} mpg - miles the car can drive per gallon of gas
    */
   constructor(name, tankSize, mpg) {
+    this.name = name
     this.odometer = 0 // car initilizes with zero miles
-    this.tank = tankSize // car initiazes full of gas
+    this.tank = tankSize 
+    this.tankSize = tankSize // car initiazes full of gas
+    this.mpg = mpg
     // ✨ initialize whatever other properties are needed
   }
 
@@ -152,7 +155,22 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+    const milesCanDrive = this.tank * this.mpg
+
+    let milesTest = distance - milesCanDrive
+
+    if (milesTest <= 0 ) {
+      this.odometer += distance
+      this.tank = this.tank - distance / this.mpg
+    } else {
+      const actualMilesDriven = distance - milesTest
+      this.odometer += actualMilesDriven
+      this.tank = this.tank - actualMilesDriven / this.mpg
+    }
+
+    return this.odometer
   }
+
 
   /**
    * [Exercise 6C] Adds gallons to the tank
@@ -167,8 +185,19 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    const gallonsCanFill = this.tankSize - this.tank
+    if (gallons <= gallonsCanFill) {
+      this.tank += gallons
+    } else {
+      this.tank += gallonsCanFill
+    }
+
+    return this.tank * this.mpg
   }
 }
+
+const focus = new Car('focus', 20, 30)
+
 
 /**
  * [Exercise 7] Asynchronously resolves whether a number is even
